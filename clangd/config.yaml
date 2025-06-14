@@ -1,0 +1,91 @@
+if:
+	PathMatch: [.*\.c, .*\.h]
+CompileFlags:
+	Add: [
+		# -Wall,
+		# -Wextra,
+		# -Wpedantic,
+		# -Wshadow,
+		# -Wconversion,
+	]
+# Diagnostics:
+# 	ClangTidy:
+# 		Add: modernize*
+# ---
+# if:
+# 	PathMatch: [.*\.h]
+# CompileFlags:
+# 	Add: [
+# 		-Wall,
+# 		-Wextra,
+# 		-Wpedantic,
+# 		-Wshadow,
+# 		-Wconversion,
+# 	]
+
+---
+If:
+    PathMatch: [.*\.cc, .*\.cpp, .*\.hpp, .*\.cppm, .*\.cxm, .*\.cxx, .*\.c++, .*\.h++, .*\.hh, .*\.hxx, .*\.tcc, .*\.ixx, .*\.mxx]
+CompileFlags:
+    Add: [
+        -std=c++23,
+        -Wall,
+        -Wextra,
+        -Wpedantic,
+        -Wshadow,
+        -Wconversion,
+        -Wdeprecated,
+        -Wsign-conversion,
+        -Wfloat-equal,
+        -Wnon-virtual-dtor,
+        -Wformat=2,
+        -fretain-comments-from-system-headers,
+        -fmodules,
+        #-fprebuilt-module-path=/home/clares/workspace/tmp,
+        -fmodule-file=std=/usr/include/std.pcm
+    ]
+Diagnostics:
+  ClangTidy:
+    Add: [
+      clang-analyzer-*,
+      google-*,
+      modernize-*,
+      performance-*,
+      portability-*,
+      # readability-*,
+      # bugprone-easily-swappable-parameters,
+      bugprone-implicit-widening-of-multiplication-result,
+      bugprone-narrowing-conversions,
+      bugprone-reserved-identifier,
+      bugprone-signed-char-misuse,
+      bugprone-suspicious-include,
+      bugprone-unhandled-self-assignment,
+      clang-analyzer-cplusplus.NewDelete,
+      clang-analyzer-cplusplus.NewDeleteLeaks,
+      clang-analyzer-security.insecureAPI.rand,
+      clang-diagnostic-implicit-int-float-conversion,
+      google-readability-avoid-underscore-in-googletest-name,
+      modernize-avoid-c-arrays,
+      modernize-use-nodiscard,
+      readability-convert-member-functions-to-static,
+      # readability-identifier-length,
+      readability-function-cognitive-complexity,
+      # readability-magic-numbers,
+      readability-make-member-function-const,
+      readability-qualified-auto,
+      readability-redundant-access-specifiers,
+      readability-identifier-naming
+    ]
+
+    CheckOptions:
+      readability-identifier-naming.ClassCase: CamelCase
+      readability-identifier-naming.EnumCase: CamelCase
+      readability-identifier-naming.FunctionCase: lower_case
+      readability-identifier-naming.GlobalConstantCase: UPPER_CASE
+      readability-identifier-naming.MemberCase: lower_case
+      readability-identifier-naming.PrivateMemberPrefix: _
+      readability-identifier-naming.NamespaceCase: lower_case
+      readability-identifier-naming.StructCase: CamelCase
+      readability-identifier-naming.ConceptCase: CamelCase
+      readability-identifier-naming.UnionCase: CamelCase
+      readability-identifier-naming.VariableCase: lower_case
